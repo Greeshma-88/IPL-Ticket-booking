@@ -227,3 +227,19 @@ footer {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   margin-top: 10px;
 }
+/* Show red border on invalid fields after submit attempt */
+.booking-form input:user-invalid,
+.booking-form select:user-invalid {
+  border: 2px solid red;
+  /* Keep radio buttons and checkboxes small and next to their labels */
+.booking-form input[type="radio"],
+.booking-form input[type="checkbox"] {
+  width: auto;
+  margin: 10px 6px 0 0;
+}
+}
+   .booking-form input[type="radio"],
+   .booking-form input[type="checkbox"] {
+     width: auto;
+     margin: 10px 6px 0 0;
+   }
