@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IPL Ticket Booking</title>
-  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -33,7 +33,7 @@
   <section id="about">
     <h2>About IPL 2026</h2>
     <p>The Indian Premier League is the most popular cricket league in India.</p>
-    <img src="images/cricket.jpg" alt="Cricket stadium" class="about-img">
+    <img src="img/cricket.jpg" alt="Cricket stadium" class="about-img">
     <h3>Popular Teams</h3>
     <ul>
       <li>Chennai Super Kings</li>
@@ -86,7 +86,7 @@
         <td>₹1,500</td>
         <td>₹3,500</td>
         <td>₹7,500</td>
-        <td><a href="booking.html" class="btn-small">Book</a></td>
+        <td><a href="#booking" class="btn-small book-btn">Book</a></td>
       </tr>
       <tr>
         <td>2</td>
@@ -96,7 +96,7 @@
         <td>₹1,800</td>
         <td>₹4,000</td>
         <td>₹8,000</td>
-        <td><a href="booking.html" class="btn-small">Book</a></td>
+        <td><a href="#booking" class="btn-small book-btn">Book</a></td>
       </tr>
       <tr>
         <td>3</td>
@@ -106,7 +106,7 @@
         <td>₹1,200</td>
         <td>₹3,000</td>
         <td>₹6,500</td>
-        <td><a href="booking.html" class="btn-small">Book</a></td>
+        <td><a href="#booking" class="btn-small book-btn">Book</a></td>
       </tr>
       <tr>
         <td>4</td>
@@ -116,7 +116,7 @@
         <td>₹2,000</td>
         <td>₹4,500</td>
         <td>₹9,000</td>
-        <td><a href="booking.html" class="btn-small">Book</a></td>
+        <td><a href="#booking" class="btn-small book-btn">Book</a></td>
       </tr>
     </table>
   </section>
@@ -127,7 +127,7 @@
 
     <div class="booking-area">
 
-      <form class="booking-form">
+      <form class="booking-form" id="bookingForm">
         <label for="match">Match</label>
         <select id="match">
           <option>CSK vs MI</option>
@@ -144,16 +144,16 @@
         </select>
 
         <label for="tickets">Number of Tickets</label>
-        <input type="number" id="tickets" min="1" max="10" value="1">
+        <input type="number" id="tickets" min="1" max="10" value="1" required>
 
         <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Enter your name">
+        <input type="text" id="name" placeholder="Enter your name" required>
 
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email">
+        <input type="email" id="email" placeholder="Enter your email" required>
 
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" placeholder="Enter your phone number">
+        <input type="tel" id="phone" placeholder="Enter your phone number" required>
 
         <button type="submit">Confirm Booking</button>
       </form>
@@ -215,5 +215,9 @@
     <p>&copy; 2026 IPL Ticket Booking | Greeshma V (R25EF092)</p>
   </footer>
 
+  <!-- TOAST BOX (empty, JavaScript fills it with a message) -->
+  <div id="toast"></div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
