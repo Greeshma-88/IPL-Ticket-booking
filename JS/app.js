@@ -1,4 +1,4 @@
-// Activity 4: JavaScript Basics and User Interaction
+// Activity 5: JavaScript Basics and User Interaction
 
 // 1. Reusable toast function: call it with any message
 function showToast(message) {
