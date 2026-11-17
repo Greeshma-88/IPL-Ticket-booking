@@ -10,10 +10,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -24,7 +20,7 @@ body {
 
 section {
   padding: 40px 30px;
-  scroll-margin-top: 60px;
+  scroll-margin-top: 60px;   /* stops the fixed navbar hiding the heading */
 }
 
 h2 {
@@ -171,6 +167,19 @@ td {
   border-radius: 5px;
 }
 
+/* Keep radio buttons and checkboxes small and next to their labels */
+.booking-form input[type="radio"],
+.booking-form input[type="checkbox"] {
+  width: auto;
+  margin: 10px 6px 0 0;
+}
+
+/* Show red border on invalid fields after submit attempt */
+.booking-form input:user-invalid,
+.booking-form select:user-invalid {
+  border: 2px solid red;
+}
+
 .booking-form button {
   margin-top: 20px;
   width: 100%;
@@ -192,6 +201,17 @@ td {
   border-left: 6px solid var(--accent);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   height: fit-content;
+  transition: background-color 0.4s;
+}
+
+/* Activity 7: live summary styling */
+.summary-card span {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.summary-card.updated {
+  background-color: #fff8dc;   /* light gold flash when the summary changes */
 }
 
 /* GUIDELINE CARDS */
@@ -227,19 +247,22 @@ footer {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   margin-top: 10px;
 }
-/* Show red border on invalid fields after submit attempt */
-.booking-form input:user-invalid,
-.booking-form select:user-invalid {
-  border: 2px solid red;
-  /* Keep radio buttons and checkboxes small and next to their labels */
-.booking-form input[type="radio"],
-.booking-form input[type="checkbox"] {
-  width: auto;
-  margin: 10px 6px 0 0;
+
+/* TOAST NOTIFICATION (Activity 4) */
+#toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--primary);
+  color: white;
+  border-left: 6px solid var(--accent);
+  padding: 14px 22px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 200;
+  display: none;          /* hidden by default */
 }
+
+#toast.show {
+  display: block;         /* visible when JavaScript adds the "show" class */
 }
-   .booking-form input[type="radio"],
-   .booking-form input[type="checkbox"] {
-     width: auto;
-     margin: 10px 6px 0 0;
-   }

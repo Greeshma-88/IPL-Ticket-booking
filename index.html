@@ -86,7 +86,7 @@
         <td>₹1,500</td>
         <td>₹3,500</td>
         <td>₹7,500</td>
-        <td><a href="#booking" class="btn-small book-btn">Book</a></td>
+        <td><a href="#booking" class="btn-small book-btn" data-match="CSK vs MI">Book</a></td>
       </tr>
       <tr>
         <td>2</td>
@@ -96,7 +96,7 @@
         <td>₹1,800</td>
         <td>₹4,000</td>
         <td>₹8,000</td>
-        <td><a href="#booking" class="btn-small book-btn">Book</a></td>
+        <td><a href="#booking" class="btn-small book-btn" data-match="RCB vs KKR">Book</a></td>
       </tr>
       <tr>
         <td>3</td>
@@ -106,7 +106,7 @@
         <td>₹1,200</td>
         <td>₹3,000</td>
         <td>₹6,500</td>
-        <td><a href="#booking" class="btn-small book-btn">Book</a></td>
+        <td><a href="#booking" class="btn-small book-btn" data-match="SRH vs CSK">Book</a></td>
       </tr>
       <tr>
         <td>4</td>
@@ -116,12 +116,12 @@
         <td>₹2,000</td>
         <td>₹4,500</td>
         <td>₹9,000</td>
-        <td><a href="#booking" class="btn-small book-btn">Book</a></td>
+        <td><a href="#booking" class="btn-small book-btn" data-match="MI vs RCB">Book</a></td>
       </tr>
     </table>
   </section>
 
-  <!-- BOOKING FORM + SUMMARY -->
+  <!-- BOOKING FORM + SUMMARY (Activity 7: selectors + live summary) -->
   <section id="booking">
     <h2>Book Your Ticket</h2>
 
@@ -158,14 +158,14 @@
         <button type="submit">Confirm Booking</button>
       </form>
 
-      <div class="summary-card">
-  <h3>Booking Summary</h3>
-  <p><b>Match:</b> <span id="summaryMatch">CSK vs MI</span></p>
-  <p><b>Stand:</b> <span id="summaryStand">General</span></p>
-  <p><b>Ticket Price:</b> <span id="summaryPrice">₹1,500</span></p>
-  <p><b>Quantity:</b> <span id="summaryQty">1</span></p>
-  <p><b>Total Amount:</b> <span id="summaryTotal">₹1,500</span></p>
-</div>
+      <div class="summary-card" id="summaryCard">
+        <h3>Booking Summary</h3>
+        <p><b>Match:</b> <span id="summaryMatch">CSK vs MI</span></p>
+        <p><b>Stand:</b> <span id="summaryStand">General</span></p>
+        <p><b>Ticket Price:</b> <span id="summaryPrice">₹1,500</span></p>
+        <p><b>Quantity:</b> <span id="summaryQty">1</span></p>
+        <p><b>Total Amount:</b> <span id="summaryTotal">₹1,500</span></p>
+      </div>
 
     </div>
   </section>
