@@ -1,4 +1,4 @@
-// Activity 4 + Activity 7: JavaScript, Selectors and Live Interaction
+// Activity 4, 5 and 7: JavaScript Basics, User Interaction, Selectors and Live Interaction
 
 // ---------- 1. TOAST ----------
 var toastTimer;   // remembers the running timer so toasts don't hide each other early
