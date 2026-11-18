@@ -12,7 +12,8 @@
   <header>
     <nav>
       <h2>IPL Tickets</h2>
-      <ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+      <ul id="navMenu">
         <li><a href="#matches">Matches</a></li>
         <li><a href="booking.html">Book Ticket</a></li>
         <li><a href="#mybookings">My Bookings</a></li>
@@ -57,68 +58,76 @@
   <section id="matches">
     <h2>Match Schedule</h2>
 
-    <label for="team">Filter by Team:</label>
-    <select id="team">
-      <option>All Teams</option>
-      <option>CSK</option>
-      <option>MI</option>
-      <option>RCB</option>
-      <option>KKR</option>
-      <option>SRH</option>
-    </select>
+    <div class="match-controls">
+      <div>
+        <label for="team">Filter by Team:</label>
+        <select id="team">
+          <option>All Teams</option>
+          <option>CSK</option>
+          <option>MI</option>
+          <option>RCB</option>
+          <option>KKR</option>
+          <option>SRH</option>
+        </select>
+      </div>
 
-    <table>
-      <tr>
-        <th>Match No.</th>
-        <th>Teams</th>
-        <th>Date &amp; Time</th>
-        <th>Venue</th>
-        <th>General</th>
-        <th>Premium</th>
-        <th>VIP</th>
-        <th>Book</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>CSK vs MI</td>
-        <td>28 Mar 2026, 7:30 PM</td>
-        <td>Chennai</td>
-        <td>₹1,500</td>
-        <td>₹3,500</td>
-        <td>₹7,500</td>
-        <td><a href="#booking" class="btn-small book-btn" data-match="CSK vs MI">Book</a></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>RCB vs KKR</td>
-        <td>30 Mar 2026, 7:30 PM</td>
-        <td>Bengaluru</td>
-        <td>₹1,800</td>
-        <td>₹4,000</td>
-        <td>₹8,000</td>
-        <td><a href="#booking" class="btn-small book-btn" data-match="RCB vs KKR">Book</a></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>SRH vs CSK</td>
-        <td>02 Apr 2026, 3:30 PM</td>
-        <td>Hyderabad</td>
-        <td>₹1,200</td>
-        <td>₹3,000</td>
-        <td>₹6,500</td>
-        <td><a href="#booking" class="btn-small book-btn" data-match="SRH vs CSK">Book</a></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>MI vs RCB</td>
-        <td>05 Apr 2026, 7:30 PM</td>
-        <td>Mumbai</td>
-        <td>₹2,000</td>
-        <td>₹4,500</td>
-        <td>₹9,000</td>
-        <td><a href="#booking" class="btn-small book-btn" data-match="MI vs RCB">Book</a></td>
-      </tr>
-    </table>
+      <div class="view-toggle">
+        <button type="button" class="view-btn active" id="gridBtn">Grid View</button>
+        <button type="button" class="view-btn" id="listBtn">List View</button>
+      </div>
+    </div>
+
+    <div class="match-grid" id="matchGrid">
+      <div class="match-card" data-teams="CSK MI">
+        <span class="match-no">Match 1</span>
+        <h3>CSK vs MI</h3>
+        <p>&#128197; 28 Mar 2026, 7:30 PM</p>
+        <p>&#128205; Chennai</p>
+        <div class="price-row">
+          <span>General ₹1,500</span>
+          <span>Premium ₹3,500</span>
+          <span>VIP ₹7,500</span>
+        </div>
+        <a href="#booking" class="btn-small book-btn" data-match="CSK vs MI">Book</a>
+      </div>
+      <div class="match-card" data-teams="RCB KKR">
+        <span class="match-no">Match 2</span>
+        <h3>RCB vs KKR</h3>
+        <p>&#128197; 30 Mar 2026, 7:30 PM</p>
+        <p>&#128205; Bengaluru</p>
+        <div class="price-row">
+          <span>General ₹1,800</span>
+          <span>Premium ₹4,000</span>
+          <span>VIP ₹8,000</span>
+        </div>
+        <a href="#booking" class="btn-small book-btn" data-match="RCB vs KKR">Book</a>
+      </div>
+      <div class="match-card" data-teams="SRH CSK">
+        <span class="match-no">Match 3</span>
+        <h3>SRH vs CSK</h3>
+        <p>&#128197; 02 Apr 2026, 3:30 PM</p>
+        <p>&#128205; Hyderabad</p>
+        <div class="price-row">
+          <span>General ₹1,200</span>
+          <span>Premium ₹3,000</span>
+          <span>VIP ₹6,500</span>
+        </div>
+        <a href="#booking" class="btn-small book-btn" data-match="SRH vs CSK">Book</a>
+      </div>
+      <div class="match-card" data-teams="MI RCB">
+        <span class="match-no">Match 4</span>
+        <h3>MI vs RCB</h3>
+        <p>&#128197; 05 Apr 2026, 7:30 PM</p>
+        <p>&#128205; Mumbai</p>
+        <div class="price-row">
+          <span>General ₹2,000</span>
+          <span>Premium ₹4,500</span>
+          <span>VIP ₹9,000</span>
+        </div>
+        <a href="#booking" class="btn-small book-btn" data-match="MI vs RCB">Book</a>
+      </div>
+    </div>
+    <p class="no-match" id="noMatch">No matches found for this team.</p>
   </section>
 
   <!-- BOOKING FORM + SUMMARY (Activity 7: selectors + live summary) -->

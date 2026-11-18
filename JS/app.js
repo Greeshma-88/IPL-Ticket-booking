@@ -1,10 +1,12 @@
-// Activity 4, 5 and 7: JavaScript Basics, User Interaction, Selectors and Live Interaction
+// Activity 4, 5, 7 and 8: JavaScript Basics, Selectors, Live Interaction, Responsive Layout
+// (guards like "if (x)" let this same file work on both index.html and booking.html)
 
 // ---------- 1. TOAST ----------
 var toastTimer;   // remembers the running timer so toasts don't hide each other early
 
 function showToast(message) {
   var toast = document.getElementById("toast");
+  if (!toast) { return; }
 
   toast.textContent = message;
   toast.classList.add("show");
@@ -18,16 +20,82 @@ function showToast(message) {
 // ---------- 2. SMOOTH SCROLL ----------
 function scrollToBooking() {
   var bookingSection = document.getElementById("booking");
-  bookingSection.scrollIntoView({ behavior: "smooth" });
+  if (bookingSection) {
+    bookingSection.scrollIntoView({ behavior: "smooth" });
+  }
 }
 
-// ---------- 3. SELECT THE FORM CONTROLS (DOM selectors) ----------
+// ---------- 3. HAMBURGER MENU (Activity 8) ----------
+var hamburger = document.getElementById("hamburger");
+var navMenu = document.getElementById("navMenu");
+
+if (hamburger && navMenu) {
+  // click the hamburger -> toggle the "open" class
+  hamburger.addEventListener("click", function () {
+    navMenu.classList.toggle("open");
+  });
+
+  // close the menu after a link is clicked
+  var navLinks = navMenu.querySelectorAll("a");
+  for (var n = 0; n < navLinks.length; n++) {
+    navLinks[n].addEventListener("click", function () {
+      navMenu.classList.remove("open");
+    });
+  }
+}
+
+// ---------- 4. FILTER MATCH CARDS BY TEAM (Activity 8) ----------
+var teamSelect = document.getElementById("team");
+var matchCards = document.querySelectorAll(".match-card");
+var noMatch = document.getElementById("noMatch");
+
+function filterMatches() {
+  var team = teamSelect.value;
+  var visible = 0;
+
+  for (var i = 0; i < matchCards.length; i++) {
+    var teams = matchCards[i].getAttribute("data-teams");   // e.g. "CSK MI"
+
+    if (team === "All Teams" || teams.split(" ").indexOf(team) !== -1) {
+      matchCards[i].style.display = "";
+      visible++;
+    } else {
+      matchCards[i].style.display = "none";
+    }
+  }
+
+  noMatch.style.display = (visible === 0) ? "block" : "none";
+}
+
+if (teamSelect) {
+  teamSelect.addEventListener("change", filterMatches);
+}
+
+// ---------- 5. GRID / LIST VIEW TOGGLE (Activity 8) ----------
+var matchGrid = document.getElementById("matchGrid");
+var gridBtn = document.getElementById("gridBtn");
+var listBtn = document.getElementById("listBtn");
+
+if (matchGrid && gridBtn && listBtn) {
+  gridBtn.addEventListener("click", function () {
+    matchGrid.classList.remove("list-view");
+    gridBtn.classList.add("active");
+    listBtn.classList.remove("active");
+  });
+
+  listBtn.addEventListener("click", function () {
+    matchGrid.classList.add("list-view");
+    listBtn.classList.add("active");
+    gridBtn.classList.remove("active");
+  });
+}
+
+// ---------- 6. BOOKING FORM + LIVE SUMMARY (index.html only) ----------
 var matchSelect = document.getElementById("match");
 var standSelect = document.querySelector("#stand");
 var ticketsInput = document.getElementById("tickets");
 var bookingForm = document.getElementById("bookingForm");
 
-// ---------- 4. SELECT THE SUMMARY CARD ELEMENTS ----------
 var summaryCard = document.getElementById("summaryCard");
 var summaryMatch = document.getElementById("summaryMatch");
 var summaryStand = document.getElementById("summaryStand");
@@ -35,7 +103,6 @@ var summaryPrice = document.getElementById("summaryPrice");
 var summaryQty = document.getElementById("summaryQty");
 var summaryTotal = document.getElementById("summaryTotal");
 
-// ---------- 5. PRICE LIST ----------
 var prices = {
   "CSK vs MI":  { General: 1500, Premium: 3500, VIP: 7500 },
   "RCB vs KKR": { General: 1800, Premium: 4000, VIP: 8000 },
@@ -52,9 +119,7 @@ function formatRupees(amount) {
   return "₹" + amount.toLocaleString("en-IN");
 }
 
-// ---------- 6. READ CHOICES, CALCULATE, UPDATE SUMMARY ----------
 function updateSummary(showMessage) {
-  // read what the user selected
   var match = matchSelect.value;
   var stand = standSelect.value;
   var tickets = Number(ticketsInput.value);
@@ -68,18 +133,15 @@ function updateSummary(showMessage) {
   }
   ticketsInput.value = tickets;
 
-  // calculate
   var price = getPrice(match, stand);
   var total = price * tickets;
 
-  // display in the Booking Summary Card
   summaryMatch.textContent = match;
   summaryStand.textContent = stand;
   summaryPrice.textContent = formatRupees(price);
   summaryQty.textContent = tickets;
   summaryTotal.textContent = formatRupees(total);
 
-  // small highlight effect on the card
   summaryCard.classList.add("updated");
   setTimeout(function () {
     summaryCard.classList.remove("updated");
@@ -90,42 +152,44 @@ function updateSummary(showMessage) {
   }
 }
 
-// ---------- 7. CHANGE EVENT LISTENERS (live update, no reload) ----------
-matchSelect.addEventListener("change", function () {
-  updateSummary(true);
-});
+// only run the summary code on the page that has the summary card
+if (summaryCard && bookingForm) {
 
-standSelect.addEventListener("change", function () {
-  updateSummary(true);
-});
+  matchSelect.addEventListener("change", function () {
+    updateSummary(true);
+  });
 
-ticketsInput.addEventListener("change", function () {
-  updateSummary(true);
-});
+  standSelect.addEventListener("change", function () {
+    updateSummary(true);
+  });
 
-// ---------- 8. BOOK BUTTONS IN THE SCHEDULE TABLE ----------
-var bookButtons = document.querySelectorAll(".book-btn");
+  ticketsInput.addEventListener("change", function () {
+    updateSummary(true);
+  });
 
-for (var i = 0; i < bookButtons.length; i++) {
-  bookButtons[i].addEventListener("click", function (event) {
+  // Book buttons on the match cards
+  var bookButtons = document.querySelectorAll(".book-btn");
+
+  for (var b = 0; b < bookButtons.length; b++) {
+    bookButtons[b].addEventListener("click", function (event) {
+      event.preventDefault();
+
+      matchSelect.value = this.getAttribute("data-match");
+      updateSummary(false);
+
+      scrollToBooking();
+      showToast("Match selected! Please fill in the booking form.");
+    });
+  }
+
+  // Confirm booking
+  bookingForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // preselect the match from the row that was clicked
-    matchSelect.value = this.getAttribute("data-match");
     updateSummary(false);
-
-    scrollToBooking();
-    showToast("Match selected! Please fill in the booking form.");
+    showToast("Booking confirmed! Thank you.");
   });
-}
 
-// ---------- 9. CONFIRM BOOKING (form submit) ----------
-bookingForm.addEventListener("submit", function (event) {
-  event.preventDefault();   // stop the page from reloading
-
+  // show correct summary when page first loads
   updateSummary(false);
-  showToast("Booking confirmed! Thank you.");
-});
-
-// ---------- 10. SHOW CORRECT SUMMARY WHEN PAGE FIRST LOADS ----------
-updateSummary(false);
+}

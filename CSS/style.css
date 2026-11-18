@@ -266,3 +266,216 @@ footer {
 #toast.show {
   display: block;         /* visible when JavaScript adds the "show" class */
 }
+
+/* =====================================================
+   ACTIVITY 8: RESPONSIVE LAYOUT (Flexbox + Grid + Media Queries)
+   ===================================================== */
+
+/* ---------- NAV: Flexbox (logo left, links right) ---------- */
+.hamburger {
+  display: none;               /* only visible on tablet/mobile */
+  background: none;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 24px;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ---------- MATCH SCHEDULE: filter + view toggle bar ---------- */
+.match-controls {
+  display: flex;               /* Flexbox */
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.match-controls select {
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  margin-left: 8px;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.view-btn {
+  padding: 8px 18px;
+  border: 2px solid var(--primary);
+  background-color: white;
+  color: var(--primary);
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-btn.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* ---------- MATCH CARDS: CSS Grid ---------- */
+.match-grid {
+  display: grid;               /* CSS Grid */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.match-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 5px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.match-card h3 {
+  margin: 0;
+  color: var(--primary);
+}
+
+.match-card .match-no {
+  font-size: 13px;
+  color: #777777;
+  font-weight: bold;
+}
+
+.match-card p {
+  margin: 0;
+}
+
+.match-card .price-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.match-card .price-row span {
+  background-color: var(--background);
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.match-card .btn-small {
+  align-self: flex-start;
+}
+
+/* LIST VIEW: JavaScript adds .list-view to .match-grid */
+.match-grid.list-view {
+  grid-template-columns: 1fr;
+}
+
+.match-grid.list-view .match-card {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-top: none;
+  border-left: 5px solid var(--accent);
+}
+
+.no-match {
+  display: none;
+  margin-top: 15px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+/* ---------- GUIDELINES: 3-column CSS Grid ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* =====================================================
+   MEDIA QUERIES
+   ===================================================== */
+
+/* Tablets and below: stack into ONE column + hamburger menu */
+@media (max-width: 900px) {
+  .hamburger {
+    display: block;
+  }
+
+  nav ul {
+    display: none;             /* hidden until hamburger is clicked */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary);
+    padding: 10px 0;
+  }
+
+  nav ul.open {              /* JavaScript toggles this class */
+    display: flex;
+  }
+
+  nav li {
+    margin: 0;
+    text-align: center;
+  }
+
+  nav a {
+    display: block;
+    padding: 14px;
+    border-radius: 0;
+  }
+
+  .match-grid,
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-area {
+    flex-direction: column;
+  }
+
+  .match-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  section {
+    padding: 30px 15px;
+  }
+
+  nav {
+    padding: 0 15px;
+  }
+
+  .hero {
+    padding: 60px 15px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .match-grid.list-view .match-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* big tables scroll sideways instead of breaking the page */
+  #mybookings {
+    overflow-x: auto;
+  }
+}
